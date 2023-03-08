@@ -1,0 +1,96 @@
+# %% [code]
+# %% [code] {"execution":{"iopub.status.busy":"2022-03-31T09:24:41.069448Z","iopub.execute_input":"2022-03-31T09:24:41.069771Z","iopub.status.idle":"2022-03-31T09:24:41.089236Z","shell.execute_reply.started":"2022-03-31T09:24:41.069738Z","shell.execute_reply":"2022-03-31T09:24:41.087818Z"}}
+# This Python 3 environment comes with many helpful analytics libraries installed
+# It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
+# For example, here's several helpful packages to load
+
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+import os
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+
+# %% [code] {"execution":{"iopub.status.busy":"2022-03-31T09:24:41.090718Z","iopub.execute_input":"2022-03-31T09:24:41.091216Z","iopub.status.idle":"2022-03-31T09:24:41.151713Z","shell.execute_reply.started":"2022-03-31T09:24:41.091171Z","shell.execute_reply":"2022-03-31T09:24:41.150611Z"}}
+both = pd.read_csv("/kaggle/input/final2/CombinedSideways.csv")
+both.head()
+
+# %% [code] {"execution":{"iopub.status.busy":"2022-03-31T09:24:41.153724Z","iopub.execute_input":"2022-03-31T09:24:41.153959Z","iopub.status.idle":"2022-03-31T09:24:41.464165Z","shell.execute_reply.started":"2022-03-31T09:24:41.153931Z","shell.execute_reply":"2022-03-31T09:24:41.462977Z"}}
+from matplotlib import pyplot as plt
+from matplotlib import style
+
+
+
+style.use("ggplot")
+plt.figure(figsize=(20,5))
+
+plt.title("Monthly Volatility of Bitcoin Vs Monero")
+
+
+plt.xlabel('Dates')
+plt.ylabel('Monthly Volatility')
+
+x = ["06-21", "07-21", "08-21", "09-21", "10-21", "11-21", "12-21", "01-22", "02-22"]
+y1 = [44.16,16.16, 23.73, 30.71, 18.19, 23.91, 25.61, 27.57, 22.48]
+y2 = [28.63, 16.95, 17.62, 24.19, 17.09, 16.90, 19.06, 15.87, 18.92]
+
+plt.plot(x, y1,marker ='o', label = 'bitcoin')
+plt.plot(x, y2,marker = 'v', label = 'Monero')
+
+plt.legend()
+plt.show()
+
+# %% [code] {"execution":{"iopub.status.busy":"2022-03-31T09:24:41.465808Z","iopub.execute_input":"2022-03-31T09:24:41.466157Z","iopub.status.idle":"2022-03-31T09:24:41.849967Z","shell.execute_reply.started":"2022-03-31T09:24:41.466115Z","shell.execute_reply":"2022-03-31T09:24:41.849230Z"}}
+from matplotlib import pyplot as plt
+from matplotlib import style
+
+
+
+style.use("ggplot")
+plt.figure(figsize=(20,5))
+
+plt.title("Open & Close Prices of Bitcoin")
+
+plt.xlabel('Dates')
+plt.ylabel('Prices')
+
+# plt.plot(both['Date'], both['OpenB'],marker ='o', label = 'open')
+plt.plot(both['Date'], both['OpenB'], color='green', linestyle='dashed', linewidth = 1,
+         marker='o', markerfacecolor='blue', markersize=12)
+# plt.plot(both['Date'], both['CloseB'],marker ='.', label = 'close')
+plt.plot(both['Date'], both['CloseB'], color='brown', linestyle='dashed', linewidth = 1,
+         marker='.', markerfacecolor='yellow', markersize=12)
+
+# plt.plot(both['Date'], both['OpenM'],marker = 'v', label = 'Monero')
+
+plt.legend()
+plt.show()
+
+# %% [code] {"execution":{"iopub.status.busy":"2022-03-31T09:24:41.851397Z","iopub.execute_input":"2022-03-31T09:24:41.851730Z","iopub.status.idle":"2022-03-31T09:24:42.126805Z","shell.execute_reply.started":"2022-03-31T09:24:41.851700Z","shell.execute_reply":"2022-03-31T09:24:42.126129Z"}}
+from matplotlib import pyplot as plt
+from matplotlib import style
+
+
+
+style.use("ggplot")
+plt.figure(figsize=(20,5))
+
+plt.title("Open & Close Prices of Monero")
+
+plt.xlabel('Dates')
+plt.ylabel('Prices')
+
+plt.plot(both['Date'], both['OpenM'],marker ='o', label = 'open')
+plt.plot(both['Date'], both['CloseM'],marker ='.', label = 'close')
+
+# plt.plot(both['Date'], both['OpenM'],marker = 'v', label = 'Monero')
+
+plt.legend()
+plt.show()
